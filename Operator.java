@@ -11,7 +11,7 @@ public class Operator {
     public void help() {
         System.out.println("Welcome to " + library.getName() + " Library");
         System.out.println("How can I help you?\n");
-        int choice = 0;
+        int choice;
         Scanner scanner = new Scanner(System.in);
 
         boolean flag;
@@ -22,6 +22,7 @@ public class Operator {
         int numberOfCopy;
         String userName;
         String userPhoneNumber;
+        int tempChoice;
 
         do{
             System.out.println("1. Show book list");
@@ -92,9 +93,9 @@ public class Operator {
                     System.out.println("  4. === Back ===\n");
 
                     System.out.print("=== Enter your choice: ");
-                    int choice1 = scanner.nextInt();
+                    tempChoice = scanner.nextInt();
 
-                    switch (choice1) {
+                    switch (tempChoice) {
                         case 1:
                             System.out.print("Enter title: ");
                             title = scanner.next();
@@ -117,9 +118,71 @@ public class Operator {
                     break;
 
                 case 5:
-                    for (User user : library.getAllUsers()) {
-                        System.out.println(user.getName());
+                    System.out.print("Enter ISBN of book: ");
+                    isbn = scanner.next();
+
+                    System.out.println("0.=== Back ===\n");
+                    System.out.println("1. Title ");
+                    System.out.println("2. Author ");
+                    System.out.println("3. ISBN ");
+                    System.out.println("4. published Year ");
+                    System.out.println("5. Number of copies");
+                    System.out.println("=== Enter your choice: ");
+                    tempChoice = scanner.nextInt();
+
+                    if (tempChoice == 0) { break; }
+
+                    for (Book book : this.library.getBooks()) {
+                        if (book.getIsbn().equals(isbn)) {
+                            switch (tempChoice) {
+                                case 1:
+                                    System.out.print("Enter new title: ");
+                                    title = scanner.next();
+                                    book.setTitle(title);
+                                    break;
+
+                                case 2:
+                                    System.out.print("Enter new author: ");
+                                    author = scanner.next();
+                                    book.setAuthor(author);
+                                    break;
+
+                                case 3:
+                                    do {
+                                        System.out.print("Enter new ISBN: ");
+                                        isbn = scanner.next();
+
+                                        flag = false;
+                                        for (Book book2 : this.library.getBooks()) {
+                                            if (book2.getIsbn().equals(isbn)) {
+                                                flag = true;
+                                                break;
+                                            }
+                                        }
+                                        if (flag) {
+                                            System.out.print("=== ISBN already exists ===");
+                                        }
+                                        else {
+                                            book.setIsbn(isbn);
+                                        }
+                                    } while (flag);
+                                    break;
+
+                                case 4:
+                                    System.out.print("Enter new published year: ");
+                                    year = scanner.next();
+                                    book.setPublishYear(year);
+                                    break;
+
+                                case 5:
+                                    System.out.print("Enter new number of copies: ");
+                                    numberOfCopy = scanner.nextInt();
+                                    book.setNumberOfBook(numberOfCopy);
+                                    break;
+                            }
+                        }
                     }
+
 
                     break;
 

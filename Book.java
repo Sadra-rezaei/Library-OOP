@@ -22,15 +22,29 @@ public class Book {
         return this.title;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public String getIsbn() {
         return this.isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
 
     public String getAuthor() {
         return this.author;
     }
 
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
     public String getPublishYear() { return this.publishYear; }
+
+    public void setPublishYear(String publishYear) { this.publishYear = publishYear; }
 
     public int getNumberOfBook() { return this.numberOfBook; }
 
